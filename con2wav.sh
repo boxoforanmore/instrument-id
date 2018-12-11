@@ -16,7 +16,7 @@ do
     cd "$fname"
   
     # Format for loop from https://stackoverflow.com/questions/18621041/how-to-batch-convert-sph-files-to-wav-with-sox
-    for f in *.au 
+    for f in *.mp3 
     do  
       sox -t mp3 "$f" -b 16 -t wav "${f%.*}.wav"
     done
