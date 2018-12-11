@@ -9,10 +9,13 @@ do
 
     echo "Trimming files in $fname to be from 30 seconds long (20s-50s)..."
     cd "$fname"
+    number = 0
 
     for f in *.mp3
     do
-      sox "$f" "$f"2.mp3 trim 20 50
+      new_f = "$fname$number"
+      sox "$f" "$fname$number.mp3" trim 20 50
+      (( ++number ))
     done
 
   fi
