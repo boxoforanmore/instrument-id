@@ -15,7 +15,7 @@
 
 
 ## File Notes ##
-### `classify_instrument.py' ###
+### `classify_instrument.py` ###
 * Classifies an instrument from a music sample and prints the predicted label
 * Expects 30 second sound files
 * Takes command line arguments of the files
