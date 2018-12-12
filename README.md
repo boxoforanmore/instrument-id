@@ -39,3 +39,4 @@
 
 
 
+#### Processes and concepts learned from 'Building Machine Learning Systems with Python' by Coelho, Richert, and Brucher, and 'Python Machine Learning: Second Edition' by Raschka and Mirjalili ####
