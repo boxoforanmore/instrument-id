@@ -1,6 +1,5 @@
 # Forward Propagating NN Classifier that uses ffts to classify instruments used in Irish Traditional Music #
 
-=============
 
 ## Current Model: ##
 * Saved as an h5 file in the `models` directory
@@ -13,7 +12,6 @@
 * Needs a script to load, preprocess, and classify a new data
 * Tested and run only on Python 3.6
 
-=============
 
 
 ## File Notes ##
