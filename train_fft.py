@@ -4,6 +4,7 @@ import scipy
 import tensorflow as tf
 import tensorflow.keras as keras
 from python_speech_features import mfcc
+import numpy as np
 
 # Two separate directories to guarantee that some from each label are used
 # (vs RandomSplit)
@@ -19,11 +20,11 @@ def load_fft(instruments, base_dir=INS_DIR):
     labels = []
 
     for label, instrument in enumerate(instruments):
-        tt_dir = Path(base_dir) / instrument
+        ins_dir = Path(base_dir) / instrument
 
-        for fn in tt_dir.glob('*.fft.npy'):
+        for fn in ins_dir.glob('*.fft.npy'):
             fft_features = np.load(fn)
-            num_ceps = len(fft)
+            #num_ceps = len(fft)
 
             # Average per coefficient over all frames for better generalization
             data.append(fft_features[:4000])
@@ -32,13 +33,13 @@ def load_fft(instruments, base_dir=INS_DIR):
     return np.array(data), np.array(labels)
 
 # Try for 70/30 split of data
-X_train, y_train = load_ceps(tune_types=INSTRUMENTS)
-X_test, y_test = load_ceps(tune_types=INSTRUMENTS, base_dir=TEST_DIR)
+X_train, y_train = load_fft(instruments=INSTRUMENTS)
+X_test, y_test = load_fft(instruments=INSTRUMENTS, base_dir=TEST_DIR)
 
 print()
-print('X_train => Rows: %d, Columns: %d' % (X_train.shape[0], X_train.shape[1])
+print('X_train => Rows: %d, Columns: %d' % (X_train.shape[0], X_train.shape[1]))
 print()
-print('X_test  => Rows: %d, Columns: %d' % (X_test.shape[0], X_test.shape[1])
+print('X_test  => Rows: %d, Columns: %d' % (X_test.shape[0], X_test.shape[1]))
 print()
 print()
 
@@ -49,6 +50,10 @@ tf.set_random_seed(123)
 
 # Onehot encode the labels
 y_train_onehot = keras.utils.to_categorical(y_train)
+
+print('Training labels: ', y_train)
+
+print('Onehot training labels', y_train_onehot)
 
 print()
 print('First 3 labels: ', y_train[:3])
@@ -88,13 +93,13 @@ model.compile(optimizer=sgd_optimizer, loss='categorical_crossentropy')
 
 
 # Train with fit method
-history = model.fit(X_train_centered, y_train_onehot,
+history = model.fit(X_train, y_train_onehot,
                     batch_size=64, epochs=50, verbose=1,
                     validation_split=0.1)
 
 
 # Predict class labels (return class labels as integers)
-y_train_pred = model.predict_classes(X_train_centered, verbose=0)
+y_train_pred = model.predict_classes(X_train, verbose=0)
 correct_preds = np.sum(y_train == y_train_pred, axis=0)
 train_acc = correct_preds / y_train.shape[0]
 
@@ -104,7 +109,7 @@ print()
 print('Training accuracy: %.2f%%' % (train_acc * 100))
 print()
 
-y_test_pred = model.predict_classes(X_test_centered, verbose=0)
+y_test_pred = model.predict_classes(X_test, verbose=0)
 
 correct_preds = np.sum(y_test == y_test_pred, axis=0)
 test_acc = correct_preds / y_test.shape[0]
