@@ -23,7 +23,6 @@ def load_fft(instruments, base_dir=INS_DIR):
 
         for fn in ins_dir.glob('*.fft.npy'):
             fft_features = np.load(fn)
-            #num_ceps = len(fft)
 
             # Average per coefficient over all frames for better generalization
             data.append(fft_features[:4000])
@@ -63,15 +62,16 @@ model = keras.models.Sequential()
 # Input layer; input dimensions must match number of features in the training set
 # Number of output and input units in two consecutive layers must also match
 
+# use 'selu', 'relu', 'elu', 'sigmoid', 'tanh'
 model.add(keras.layers.Dense(units=100, input_dim=X_train.shape[1],
                              kernel_initializer='glorot_uniform',
                              bias_initializer='zeros',
-                             activation='tanh'))
+                             activation='selu'))
 
 model.add(keras.layers.Dense(units=100, input_dim=100,
                              kernel_initializer='glorot_uniform',
                              bias_initializer='zeros',
-                             activation='tanh'))
+                             activation='selu'))
 
 model.add(keras.layers.Dense(units=y_train_onehot.shape[1], input_dim=100, 
                              kernel_initializer='glorot_uniform',
