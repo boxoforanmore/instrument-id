@@ -1,4 +1,4 @@
-# Forward Propagating NN Classifier that uses ffts to classify instruments used in Irish Traditional Music #
+# Forward-Propagating NN classifier that uses Cepstrums to classify 5 instruments used in Irish Traditional Music #
 
 
 ## Current Model ##
@@ -31,7 +31,7 @@
 
 
 ### `gen_fft.py` and `gen_ceps.py` ###
-* Processes files with FFT or ceps
+* Processes files with FFT or ceps (MFCs)
 
 
 ### `train_fft.py` ###
@@ -41,6 +41,8 @@
 
 ### `train_ceps.py` ###
 * Trains and saves a keras model on the training and test data
+* Current test data accuracy ~ 88%
+
 
 
 
