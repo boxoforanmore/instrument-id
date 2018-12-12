@@ -78,12 +78,12 @@ model.add(keras.layers.Dense(units=y_train_onehot.shape[1], input_dim=100,
                              bias_initializer='zeros',
                              activation='softmax'))
 
-# Using SGD for more time efficient activation; 
+# Using SGD for better base performance and efficient activation; 
 # need to play with decay rate
 sgd_optimizer = keras.optimizers.SGD(lr=0.001, decay=1e-7, momentum=.9)
 adadelta_optimizer = keras.optimizers.Adadelta()
 rms_prop_optimizer = keras.optimizers.RMSprop()
-
+nadam_optimizer = keras.optimizers.Nadam()
 
 # Crossentropy is the generalization of logistic regression for
 # multiclass predictions via softmax
