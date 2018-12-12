@@ -3,7 +3,6 @@ import numpy as numpy
 import scipy
 import tensorflow as tf
 import tensorflow.keras as keras
-from python_speech_features import mfcc
 import numpy as np
 
 # Two separate directories to guarantee that some from each label are used
@@ -51,10 +50,6 @@ tf.set_random_seed(123)
 # Onehot encode the labels
 y_train_onehot = keras.utils.to_categorical(y_train)
 
-print('Training labels: ', y_train)
-
-print('Onehot training labels', y_train_onehot)
-
 print()
 print('First 3 labels: ', y_train[:3])
 print()
@@ -78,7 +73,7 @@ model.add(keras.layers.Dense(units=100, input_dim=100,
                              bias_initializer='zeros',
                              activation='tanh'))
 
-model.add(keras.layers.Dense(units=y_train_onehot.shape[1], input_dim=50, 
+model.add(keras.layers.Dense(units=y_train_onehot.shape[1], input_dim=100, 
                              kernel_initializer='glorot_uniform',
                              bias_initializer='zeros',
                              activation='softmax'))
@@ -86,15 +81,18 @@ model.add(keras.layers.Dense(units=y_train_onehot.shape[1], input_dim=50,
 # Using SGD for more time efficient activation; 
 # need to play with decay rate
 sgd_optimizer = keras.optimizers.SGD(lr=0.001, decay=1e-7, momentum=.9)
+adadelta_optimizer = keras.optimizers.Adadelta()
+rms_prop_optimizer = keras.optimizers.RMSprop()
+
 
 # Crossentropy is the generalization of logistic regression for
 # multiclass predictions via softmax
-model.compile(optimizer=sgd_optimizer, loss='categorical_crossentropy')
+model.compile(optimizer=rms_prop_optimizer, loss='categorical_crossentropy')
 
 
 # Train with fit method
 history = model.fit(X_train, y_train_onehot,
-                    batch_size=64, epochs=50, verbose=1,
+                    batch_size=64, epochs=70, verbose=1,
                     validation_split=0.1)
 
 
