@@ -1,3 +1,6 @@
+--> All samples started in .mp3 format and were trimmed to be 30 seconds from the 20 second mark to the 50 second mark
+
+
 Training samples are in ./instruments
 Testing samples are in ./test/instruments
 
