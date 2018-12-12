@@ -114,3 +114,6 @@ test_acc = correct_preds / y_test.shape[0]
 
 print('Test accuracy: %.2f%%' % (test_acc * 100))
 print()
+
+
+model.save('model/instrument_id.h5', overwrite=True)
