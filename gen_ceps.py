@@ -21,13 +21,13 @@ def generate_ceps(fname):
     np.save(Path(fname).with_suffix('.ceps'), mfcc(X))
 
 
-# Generate fft for the training data
+# Generate ceps for the training data
 print('Processing training data...')
 for mp3_file in Path(INS_DIR).glob('**/*.mp3'):
     generate_ceps(mp3_file)
 
 
 print('Processing test data...')
-# Generate fft for the test data
+# Generate ceps for the test data
 for mp3_file in Path(TEST_DIR).glob('**/*.mp3'):
     generate_ceps(mp3_file)
