@@ -1,4 +1,4 @@
-# Classifier that uses ffts to classify instruments used in Irish Traditional Music #
+# Forward Propagating NN Classifier that uses ffts to classify instruments used in Irish Traditional Music #
 
 =============
 
@@ -11,12 +11,19 @@
 * Hyperparameters were hand-tuned to some degree, Grid Search (or a similar optimization finder)  will be run in the future
 * Will most likely switch to a CNN or an RNN
 * Needs a script to load, preprocess, and classify a new data
-
+* Tested and run only on Python 3.6
 
 =============
 
 
 ## File Notes ##
+### `classify_instrument.py' ###
+* Classifies an instrument from a music sample and prints the predicted label
+* Expects 30 second sound files
+* Takes command line arguments of the files
+	* ie `python3 classify_instrument.py <audio_file>`
+
+
 ### `con2wav.sh` ###
 * Uses sox to convert mp3s to wav
 
