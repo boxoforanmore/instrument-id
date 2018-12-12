@@ -92,7 +92,7 @@ model.compile(optimizer=rms_prop_optimizer, loss='categorical_crossentropy')
 
 # Train with fit method
 history = model.fit(X_train, y_train_onehot,
-                    batch_size=64, epochs=70, verbose=1,
+                    batch_size=62, epochs=70, verbose=1,
                     validation_split=0.1)
 
 
