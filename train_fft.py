@@ -7,8 +7,8 @@ from python_speech_features import mfcc
 
 # Two separate directories to guarantee that some from each label are used
 # (vs RandomSplit)
-INS_DIR = 'data/instrument'
-TEST_DIR = 'data/test/instrument'
+INS_DIR = 'data/instruments'
+TEST_DIR = 'data/test/instruments'
 
 
 INSTRUMENTS = ['accordion', 'fiddle', 'flute', 'pennywhistle', 'uilleann']
@@ -26,10 +26,10 @@ def load_fft(instruments, base_dir=INS_DIR):
             num_ceps = len(fft)
 
             # Average per coefficient over all frames for better generalization
-            data.append(fft_features[:2000])
+            data.append(fft_features[:4000])
             labels.append(label)
 
-    return np.array(data), np.array(y)
+    return np.array(data), np.array(labels)
 
 # Try for 70/30 split of data
 X_train, y_train = load_ceps(tune_types=INSTRUMENTS)
@@ -42,19 +42,6 @@ print('X_test  => Rows: %d, Columns: %d' % (X_test.shape[0], X_test.shape[1])
 print()
 print()
 
-
-'''
-# Is standardization necessary here since mfcc was done?
-# For standardization
-mean_vals = np.mean(X_train, axis=0)
-std_val = np.std(X_train)
-
-X_train_centered = (X_train - mean_vals) / std_val
-X_test_centered = (X_train - mean_vals) / std_val
-
-del X_train, X_test
-
-'''
 
 # Set random seed
 np.random.seed(123)
