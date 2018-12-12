@@ -1,7 +1,7 @@
 # Forward Propagating NN Classifier that uses ffts to classify instruments used in Irish Traditional Music #
 
 
-## Current Model: ##
+## Current Model ##
 * Saved as an h5 file in the `models` directory
 * Uses data processed from mfcc (not fft)
 * ~ 88% test accuracy, ~97% training accuracy
