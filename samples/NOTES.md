@@ -1,21 +1,28 @@
-# Artists in these Samples #
+# Single Tune Samples for Testing With the Classifier #
 
 
-## Accordion: ##
+## Artists in these Samples ##
+
+### Accordion ###
 * Bryan O'Leary
 
 
-## Fiddle: ##
+### Fiddle ###
 * Patrick Mangan
 
 
-## Flute: ##
+### Flute ###
 * Colm Guilfoyle
 
 
-## Pennywhistle: ##
+### Pennywhistle ###
 * TinWhistler
 
 
-## Uilleann Pipes: ##
+### Uilleann Pipes ###
 * Tom Delany
+
+
+
+### Notes ###
+* Pennywhistle is miscalssified currently; this is likely because the pennywhistle dataset had significantly fewer data samples than the others
