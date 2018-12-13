@@ -16,7 +16,7 @@ def generate_ceps(fname):
     ceps = mfcc(X)
     num_ceps = len(ceps)
 
-    return np.mean(ceps[num_ceps//2:(num_ceps*9)//10], axis=0)
+    return np.mean(ceps, axis=0)
 
 
 if '__main__' == __name__:
